@@ -38,7 +38,7 @@ This project is a simple API server written in Go that provides functionality fo
 
 ## Dependencies
 
-- [github.com/go-chi/chi/v5](https://github.com/go-chi/chi): Lightweight and fast HTTP router for Go.
+- [github.com/go-chi/chi/v5](https://github.com/go-chi/chi):  Lightweight and fast HTTP router for Go.
 - [github.com/golang-jwt/jwt/v4](https://github.com/golang-jwt/jwt): JSON Web Token implementation for Go.
 
 ## How to Run
@@ -53,17 +53,21 @@ This project is a simple API server written in Go that provides functionality fo
 2. Install dependencies:
 
    ```bash
-   go get -u ./...
+   go mod tidy && go mod vendor
    ```
 
 3. Build and run the server:
 
    ```bash
-   go build
-   ./<executable_name>
+   docker build -t naeem4265/api-server:1.0.8 .
+   docker run -p 8080:8080 naeem4265/api-server:1.0.8
    ```
 
-   The server will be running on `http://localhost:8080`.
+   The server will be running on `http://localhost:8080`. </br>
+   You can make curl request now. </br>
+   For signin:  </br>
+   username: naeem4265 </br>
+   password: 1234
 
 ## Configuration
 
@@ -71,4 +75,4 @@ This project is a simple API server written in Go that provides functionality fo
 
 ## Conclusion
 
-This API server provides a foundation for building a book management system. Developers can extend and customize it to suit their specific requirements for book-related applications. Feel free to enhance and contribute to the project for additional features and improvements.
+This API server provides a foundation for building a book management system. Developers can extend and customize it to suit their specific requirements for book-related applications. 
