@@ -46,8 +46,8 @@ This project is a simple API server written in Go that provides functionality fo
 1. Clone the repository:
 
    ```bash
-   git clone <repository_url>
-   cd <repository_directory>
+   git clone git@github.com:naeem4265/api-server.git
+   cd api-server
    ```
 
 2. Install dependencies:
