@@ -74,5 +74,5 @@ func SignOut(w http.ResponseWriter, r *http.Request) {
 	http.SetCookie(w, expiredCookie)
 	w.WriteHeader(http.StatusOK)
 	// You might want to redirect the user to a different page after logout
-	//http.Redirect(w, r, "/SignIn", http.StatusSeeOther)
+	http.Redirect(w, r, "/SignIn", http.StatusSeeOther)
 }
