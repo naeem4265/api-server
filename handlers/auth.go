@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"database/sql"
 	"encoding/json"
 	"net/http"
 	"time"
@@ -25,16 +26,18 @@ type Claims struct {
 	jwt.RegisteredClaims
 }
 
-func SignIn(w http.ResponseWriter, r *http.Request) {
+func SignIn(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 	var creds Credentials
 	err := json.NewDecoder(r.Body).Decode(&creds)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
-	expectedPassword, ok := users[creds.Username]
 
-	if !ok || expectedPassword != creds.Password {
+	var expectedPassword string
+	err = db.QueryRow("SELECT password From users WHERE username = ?", creds.Username).Scan(&expectedPassword)
+
+	if err != nil || expectedPassword != creds.Password {
 		w.WriteHeader(http.StatusUnauthorized)
 		return
 	}

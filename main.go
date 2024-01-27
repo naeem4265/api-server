@@ -1,19 +1,40 @@
 package main
 
 import (
+	"database/sql"
 	"fmt"
 	"log"
 	"net/http"
 
 	"github.com/go-chi/chi/v5"
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/golang-jwt/jwt/v4"
 	"github.com/naeem4265/api-server/handlers"
 )
 
 func main() {
+
+	// create a database object which can be used to connect with database.
+	db, err := sql.Open("mysql", "root:@tcp(0.0.0.0:3306)/BookServer")
+	defer db.Close()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// Now its  time to connect with oru database, database object has a method Ping.
+	// Ping returns error, if unable connect to database.
+	err = db.Ping()
+	if err != nil {
+		panic(err)
+	}
+	fmt.Print("Database Connected\n")
+
 	router := chi.NewRouter()
 
-	router.Post("/signin", handlers.SignIn)
+	// Use a closure to capture the 'db' object and pass it to the handler.
+	router.Post("/signin", func(w http.ResponseWriter, r *http.Request) {
+		handlers.SignIn(w, r, db)
+	})
 	router.Get("/signout", handlers.SignOut)
 
 	router.Route("/albums", func(r chi.Router) {
