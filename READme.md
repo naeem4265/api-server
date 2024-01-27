@@ -40,6 +40,7 @@ This project is a simple API server written in Go that provides functionality fo
 
 - [github.com/go-chi/chi/v5](https://github.com/go-chi/chi):  Lightweight and fast HTTP router for Go.
 - [github.com/golang-jwt/jwt/v4](https://github.com/golang-jwt/jwt): JSON Web Token implementation for Go.
+- [github.com/go-sql-driver/mysql](https://github.com/go-sql-driver/mysql): MySQL driver for database connection. 
 
 ## How to Run
 
@@ -48,6 +49,18 @@ This project is a simple API server written in Go that provides functionality fo
    ```bash
    git clone git@github.com:naeem4265/api-server.git
    cd api-server
+   ```
+
+2. Create Database named BookServer and table users.
+   ```
+   CREATE DATABASE BookServer;
+   
+   CREATE TABLE users
+   (username varchar(25), password varchar(25) NOT NULL, PRIMARY KEY username);
+
+   INSERT INTO users
+   (username, password)
+   values('naeem4265', '1234');
    ```
 
 2. Install dependencies:
@@ -75,4 +88,4 @@ This project is a simple API server written in Go that provides functionality fo
 
 ## Conclusion
 
-This API server provides a foundation for building a book management system. Developers can extend and customize it to suit their specific requirements for book-related applications. 
+This API server provides a foundation for building a book management system. Developers can extend and customize it to suit their specific requirements for book/product-related applications. 
